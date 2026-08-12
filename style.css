@@ -40,27 +40,41 @@ body {
     align-items: center;
 }
 
-.letter-window{
-    width: 90vw;
-    max-width: 800px;
-    aspect-ratio: 3/2;
-    padding: 20px 20px 0 20px;
+.letter-window {
+    width: min(90vw, 800px);
+
+    /* Allow the height to adjust to the screen */
+    min-height: min(70vh, 530px);
+
+    box-sizing: border-box;
+
+    padding:
+        clamp(90px, 18vw, 180px)
+        clamp(15px, 4vw, 30px)
+        clamp(20px, 5vw, 40px);
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     text-align: center;
+
     background-image: url("window.png");
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
+
     border-radius: 12px;
-    gap: 1px;
-    padding-top: 180px;
+
+    gap: clamp(5px, 1.5vw, 15px);
 
     transform: scale(1.2);
     opacity: 0;
-    transition: transform 0.6s ease, opacity 0.6s ease;
+
+    transition:
+        transform 0.6s ease,
+        opacity 0.6s ease;
 }
 
 .letter-window.open {
@@ -68,72 +82,132 @@ body {
     opacity: 1;
 }
 
-h1 {
-    font-size: 30px;
-    margin:0;
+
+/* TITLE */
+
+#letter-title {
+    font-size: clamp(18px, 5vw, 30px);
+    line-height: 1.15;
+
+    margin: 0;
+
+    max-width: 90%;
+
+    overflow-wrap: break-word;
 }
 
-p {
-    font-size: 40px;
-}
 
-/* Cat */
+/* CAT GIF */
 
 .cat {
-    width: 250px;
-    margin: 10px 0;
+    width: clamp(120px, 35vw, 250px);
+    max-width: 45%;
+
+    height: auto;
+
+    margin: clamp(5px, 2vw, 10px) 0;
+
+    object-fit: contain;
+
     transition: width 0.4s ease;
 }
 
 .letter-window.final .cat {
-    width: 180px;
+    width: clamp(100px, 28vw, 180px);
 }
 
-/* buttons */
+
+/* BUTTON CONTAINER */
+
 .buttons {
     display: flex;
+
     justify-content: center;
-    gap: 30px;
+    align-items: center;
+
+    gap: clamp(12px, 5vw, 30px);
     position: relative;
+    width: 100%;
 }
 
-.no-wrapper{
-    position:relative;
-}
+
+/* BUTTONS */
 
 .btn {
-    width: 120px;
+    width: clamp(70px, 20vw, 120px);
+    max-width: 120px;
+
+    height: auto;
+
     cursor: pointer;
     user-select: none;
 }
 
+
 .yes-btn,
 .no-btn {
-width: 120px;
-height: auto;
-display: inline-block;
+    width: clamp(70px, 20vw, 120px);
+    height: auto;
+
+    display: inline-block;
 }
 
-.yes-btn {
-    position: relative;
-    z-index: 2;
-    transform-origin: center center;
-    transition: transform 0.3s ease;
-}
 
-.no-btn {
-    z-index: 1;
-    position: relative;
-    transition: transform 0.15s ease;
-    cursor: default;
-}
+/* FINAL TEXT */
 
-.final-text{
-    font-size: 22px;
+.final-text {
+    font-size: clamp(15px, 4vw, 22px);
     line-height: 1.4;
     text-align: center;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: rgba(255,240,240,0.5);
+    max-width: 85%;
+
+    padding:
+        clamp(6px, 2vw, 10px)
+        clamp(10px, 4vw, 20px);
+
+    box-sizing: border-box;
+    background-color: rgba(255, 240, 240, 0.5);
     border-radius: 12px;
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+
+    #letter-container {
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .letter-window {
+        width: 95vw;
+        min-height: 60vh;
+        padding-top: clamp(70px, 22vw, 120px);
+        gap: 6px;
+        background-size: 100% 100%;
+    }
+
+    #letter-title {
+        font-size: clamp(17px, 5.5vw, 24px);
+        max-width: 85%;
+    }
+
+    .cat {
+        width: clamp(110px, 38vw, 180px);
+        max-width: 45%;
+    }
+
+    .buttons {
+        gap: clamp(10px, 6vw, 25px);
+    }
+
+    .btn,
+    .yes-btn,
+    .no-btn {
+        width: clamp(65px, 22vw, 100px);
+    }
+
+    .final-text {
+        font-size: clamp(14px, 4vw, 18px);
+        max-width: 85%;
+    }
 }
